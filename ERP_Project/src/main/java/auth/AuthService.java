@@ -15,7 +15,7 @@ public class AuthService {
             if (rs.next()) {
                 String role = rs.getString("role");
                 String hash = rs.getString("password_hash");
-                if(password.equals(hash)){
+                if(PasswordHasher.checkPassword(password,hash)){
                     return role;
                 }
                 /*
