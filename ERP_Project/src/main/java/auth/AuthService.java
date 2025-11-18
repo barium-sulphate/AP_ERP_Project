@@ -8,6 +8,7 @@ import java.io.*;
 public class AuthService {
     public static String login(String username, String password) {
         try (Connection conn = DBConnection.getConnection()) {
+            System.out.println("DEBUG: Retrieved hash = ");
             String sql = "SELECT role, password_hash FROM users_auth WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
@@ -15,7 +16,7 @@ public class AuthService {
             if (rs.next()) {
                 String role = rs.getString("role");
                 String hash = rs.getString("password_hash");
-                if(PasswordHasher.checkPassword(password,hash)){
+                if(password.equals(hash)){
                     return role;
                 }
                 /*

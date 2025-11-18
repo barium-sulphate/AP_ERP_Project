@@ -27,8 +27,7 @@ public class LoginUI {
             String role = AuthService.login(userText.getText(),
                     new String(passText.getPassword()));
             if (role != null) {
-                statusLabel.setText("Logged in as: " + role);
-                JOptionPane.showMessageDialog(frame, "Welcome " + role);
+                new StudentUI().setVisible(true);
             } else {
                 statusLabel.setText("Invalid login");
             }
